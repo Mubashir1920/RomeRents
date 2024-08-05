@@ -1,5 +1,6 @@
-import '@/assets/styles/global.css'
-import React from 'react';
+import '@/assets/styles/global.css';
+import Navbar from '../components/Navbar'
+
 
 export const metadata = {
     title : 'Rome Rents | Find Book Enjoy ',
@@ -10,9 +11,10 @@ const MainLayout = ({ children }) => {
     return (
         <html>
             <body>
-                <div>
+                <Navbar />
+                <main>
                     {children}
-                </div>
+                </main>
             </body>
         </html>
 
