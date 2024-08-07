@@ -1,12 +1,18 @@
 import Link from 'next/link'
+import properties from '@/properties.json';
+import PropertyCard from '@/components/PropertyCard';
 
 const PropertiesPage = () => {
   return (
-    <div>
-        <h1 className='text-3xl font-bold text-black' >Properties Page</h1>
-        <Link href='/' className='border border-gray-900 p-5 m-10' >Go to Home </Link>
-
-    </div>
+    <section class="px-4 py-6">
+      <div class="container-xl lg:container m-auto px-4 py-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {properties.map(property=>(
+            <PropertyCard />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
