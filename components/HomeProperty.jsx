@@ -1,8 +1,10 @@
-import properties from '@/properties.json'
 import PropertyCard from './PropertyCard'
 import Link from 'next/link'
+import { fetchProperties } from '@/utils/request';
 
-const HomeProperty = () => {
+
+const HomeProperty =async () => {
+    const properties =await fetchProperties();
     const recentProperties = properties
         .sort(() => Math.random() - Math.random())
         .slice(0, 3)
@@ -16,7 +18,7 @@ const HomeProperty = () => {
                         Recent Properties
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {recentProperties == 0 ? <p classNameName='text-center text-3xl font-bold' >No Properties Found</p> :
+                        {recentProperties == 0 ? <p className='text-center text-3xl font-bold' >No Properties Found</p> :
                             (recentProperties.map(prop => (
                                 <PropertyCard key={prop._id} property={prop} />
                             )))}
