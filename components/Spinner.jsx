@@ -6,16 +6,16 @@ const override = {
   margin: '100px auto',
 };
 
-const Loading = ({loading}) => {
+const Spinner = ({loading}) => {
   return (
     <ClipLoader
       color='#3b82f6'
-      cssOverride={override}
       loading={loading}
+      cssOverride={override}
       size={150}
       aria-label='Loading Spinner'
     />
   )
 }
 
-export default Loading
+export default Spinner;
