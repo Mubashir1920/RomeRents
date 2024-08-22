@@ -1,4 +1,4 @@
-import Logo from '@/assets/images/Logo.png';
+import Logo from '../assets/images/Logo.png';
 import Image from 'next/image';
 
 
