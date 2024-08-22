@@ -1,6 +1,4 @@
-import Logo from '../assets/images/Logo.png';
-import Image from 'next/image';
-
+import Link from 'next/link';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -9,10 +7,13 @@ const Footer = () => {
             <div
                 className="container mx-auto flex flex-col md:flex-row items-center justify-between px-4"
             >
-                <div className="mb-4 md:mb-0">
-                    <Image src={Logo} alt="Logo" className="h-8 w-auto" />
+                <div className="mb-4 md:mb-0 flex-col lg:flex-row flex gap-3">
+                    <Link href='/' > <p className='font-xl font-extrabold' >RomeRents</p> </Link>
+                    <Link href='/' > <p className='text-gray-500' >All Properties</p> </Link>
                 </div>
-               
+                <div className="mb-4 md:mb-0">
+                </div>
+
                 <div>
                     <p className="text-sm text-gray-500 mt-2 md:mt-0">
                         &copy; {currentYear} RomeRents. All rights reserved.
