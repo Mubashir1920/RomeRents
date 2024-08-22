@@ -2,12 +2,12 @@ const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
 
 // Get All Properties
-const fetchProperties = async () => {
+const fetchProperties = async ({showfeatured= false}={}) => {
     try {
         if(!apiDomain){
             return []
         }
-      const res = await fetch(`${apiDomain}/properties`,{
+      const res = await fetch(`${apiDomain}/properties${showfeatured ? '/featured' : ''}`,{
         cache:'no-store'
       });
   

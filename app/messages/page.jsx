@@ -1,8 +1,9 @@
+import Messages from "@/components/Messages"
 
 const MessagesPage = () => {
   return (
     <div>
-      Messages Page
+      <Messages />
     </div>
   )
 }

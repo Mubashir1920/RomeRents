@@ -2,41 +2,65 @@ import connectMongoDb from "@/config/database";
 import { getUserSession } from "@/utils/getUserSession";
 import Message from "@/models/Message";
 
+
+//GET /api/messages
+export const GET = async () => {
+    try {
+        await connectMongoDb()
+        const sessionUser = await getUserSession()
+        if (!sessionUser || !sessionUser.user) {
+            return new Response(JSON.stringify({ message: 'You Must Log In' }), { status: 401 })
+        }
+        const { userId } = sessionUser
+        const messages = await Message.find({recipient :userId })
+        .populate('sender', 'username')
+        .populate('property' , 'name')
+
+        return new Response(JSON.stringify(messages),{status:200})
+        
+
+    } catch (error) {
+        console.log(error);
+        return new Response('Error Occured' ,{status:500})        
+    }
+}
+
+
 //POST /api/messages
 
-export const POST = async(request)=>{
+export const POST = async (request) => {
 
     try {
         await connectMongoDb()
 
         const sessionUser = await getUserSession()
-        if(!sessionUser || !sessionUser.user){
-            return new Response(JSON.stringify({message:'You Must Log In'}) , {status:401})
+        if (!sessionUser || !sessionUser.user) {
+            return new Response(JSON.stringify({ message: 'You Must Log In' }), { status: 401 })
         }
-        const {user} = sessionUser
-        const {name ,email,phone ,message , recepient , property} =await request.json()
+        const { user } = sessionUser
+        const { name, email, phone, message, recepient, property } = await request.json()
 
         //Cant Send Message to themselve
-        if(user.id === recepient){
-            return new Response(JSON.stringify({message:'Bad Request Cant Send Message to Yourself'}), {status:400})
+        if (user.id === recepient) {
+            return new Response(JSON.stringify({ message: 'Bad Request Cant Send Message to Yourself' }), { status: 400 })
         }
 
         const newMessage = new Message({
-            sender : user.id,
-            recipient:recepient ,
+            sender: user.id,
+            recipient: recepient,
             property,
             name,
             email,
             phone,
-            body:message
+            body: message
         })
 
-        await  newMessage.save()
-        return new Response('Successlly Sent Message',{status:200})
-        
+        await newMessage.save()
+        return new Response('Successlly Sent Message', { status: 200 })
+
     } catch (error) {
         console.log(error);
-        return new Response('Server Went Wrong ',{status:500})
+        return new Response('Server Went Wrong ', { status: 500 })
     }
 
 

@@ -1,10 +1,11 @@
 import { ToastContainer } from 'react-toastify';
 import '@/assets/styles/global.css';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { GlobalProvider } from '@/context/GLobalContext';
 import Navbar from '../components/Navbar';
 import Footer from '@/components/Footer';
 import AuthProvider from '@/components/AuthProvider';
+import 'photoswipe/dist/photoswipe.css'
 
 
 export const metadata = {
@@ -14,18 +15,20 @@ export const metadata = {
 
 const MainLayout = ({ children }) => {
     return (
-        <AuthProvider>
-            <html>
-                <body>
-                    <Navbar />
-                    <main>
-                        {children}
-                    </main>
-                    <Footer />
-                    <ToastContainer />
-                </body>
-            </html>
-        </AuthProvider>
+        <GlobalProvider >
+            <AuthProvider>
+                <html>
+                    <body>
+                        <Navbar />
+                        <main>
+                            {children}
+                        </main>
+                        <Footer />
+                        <ToastContainer />
+                    </body>
+                </html>
+            </AuthProvider>
+        </GlobalProvider>
     )
 }
 
