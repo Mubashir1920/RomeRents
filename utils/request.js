@@ -1,13 +1,14 @@
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
-
 // Get All Properties
 const fetchProperties = async ({ showfeatured = false } = {}) => {
   try {
     if (!apiDomain) {
       return []
     }
-    const res = await fetch(`${apiDomain}/properties${showfeatured ? '/featured' : ''}`);
+    const res = await fetch(`${apiDomain}/properties${showfeatured ? '/featured' : ''}`, {
+      cache: 'no-store'
+    });
 
     if (!res.ok) {
       throw new Error('Failed To Fetch Data');
@@ -27,7 +28,9 @@ const fetchProperty = async (id) => {
     if (!apiDomain) {
       return null
     }
-    const res = await fetch(`${apiDomain}/properties/${id}`);
+    const res = await fetch(`${apiDomain}/properties/${id}`, {
+      cache: 'no-store'
+    });
 
     if (!res.ok) {
       throw new Error('Failed To Fetch Data');
